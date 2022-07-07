@@ -1,5 +1,3 @@
-import React from 'react';
-
 type Props = {
   data: Person;
   onSelect: (id: string) => void;
