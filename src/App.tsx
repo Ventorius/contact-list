@@ -1,11 +1,11 @@
-import React from 'react';
+import { useState } from 'react';
 import apiData from './api';
 import PersonInfo from './PersonInfo';
 import { useQuery } from 'react-query';
 
 function App() {
-  const [data, setData] = React.useState([]);
-  const [selected, setSelected] = React.useState([]);
+  const [data, setData] = useState<Person[]>([]);
+  const [selected, setSelected] = useState([]);
 
   const query = useQuery('contacts', apiData);
 
