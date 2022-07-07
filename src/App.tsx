@@ -1,26 +1,43 @@
 import { useState } from 'react';
 import apiData from './api';
 import PersonInfo from './PersonInfo';
-import { useQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 
 function App() {
-  const [data, setData] = useState<Person[]>([]);
+  const { isLoading, isError, data, fetchNextPage, refetch } = useInfiniteQuery(
+    'contacts',
+    apiData,
+    {
+      getNextPageParam: () => true,
+      keepPreviousData: true,
+    },
+  );
+
   const [selected, setSelected] = useState([]);
-
-  const query = useQuery('contacts', apiData);
-
-  console.log(query);
-
-  //  TODO fetch contacts using apiData function, handle loading and error states
 
   return (
     <div className="App">
       <div className="selected">Selected contacts: {selected.length}</div>
       <div className="list">
-        {data.map((personInfo) => (
-          <PersonInfo key={personInfo.id} data={personInfo} />
-        ))}
+        {isError && (
+          <div>
+            Something bad happened
+            <button className="load-more-button" onClick={() => refetch()}>
+              Refetch data
+            </button>
+          </div>
+        )}
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          data?.pages?.map((group) =>
+            group.map((personInfo) => <PersonInfo key={personInfo.id} data={personInfo} />),
+          )
+        )}
       </div>
+      <button className="load-more-button" onClick={() => fetchNextPage()}>
+        Load more
+      </button>
     </div>
   );
 }

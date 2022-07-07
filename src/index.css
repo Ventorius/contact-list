@@ -4,18 +4,43 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #f4f4f4;
+  display: flex;
+  justify-content: center;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.load-more-button {
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    color: #333;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    height: 36px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background 0.2s ease-in-out;
+
+
+}
+
+.load-more-button:hover {
+    background: #aba8a8;
+    border: 1px solid #ccc;
+}
+
+
 .App {
-  text-align: center;
+  flex-direction: column;
   display: flex;
-  justify-content: center;
-  align-items: space-between;
   margin: 20px 0;
+  max-width: 800px;
 }
 
 .selected {
