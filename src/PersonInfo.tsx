@@ -1,17 +1,15 @@
 import React from 'react';
 
 type Props = {
-  data: {
-    firstNameLastName: string;
-    jobTitle: string;
-    emailAddress: string;
-  };
+  data: Person;
+  onSelect: (id: string) => void;
+  isSelected: boolean;
 };
 
-function PersonInfo(props: Props) {
-  const { data } = props;
+function PersonInfo({ data, onSelect, isSelected }: Props) {
   return (
     <div
+      onClick={() => onSelect(data.id)}
       style={{
         display: 'flex',
         height: '100px',
@@ -23,7 +21,7 @@ function PersonInfo(props: Props) {
         background: '#fff',
         cursor: 'pointer',
       }}
-      className="person-info">
+      className={isSelected ? 'person-info-selected' : 'person-info'}>
       <div className="firstNameLastName">{data.firstNameLastName}</div>
       <div className="jobTitle">{data.jobTitle}</div>
       <div className="emailAddress">{data.emailAddress}</div>

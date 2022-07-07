@@ -13,7 +13,11 @@ function App() {
     },
   );
 
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState<string[]>([]);
+
+  const onSelect = (id: string) => {
+    setSelected(selected.includes(id) ? selected.filter((i) => i !== id) : [...selected, id]);
+  };
 
   return (
     <div className="App">
@@ -31,7 +35,14 @@ function App() {
           <div>Loading...</div>
         ) : (
           data?.pages?.map((group) =>
-            group.map((personInfo) => <PersonInfo key={personInfo.id} data={personInfo} />),
+            group.map((personInfo) => (
+              <PersonInfo
+                isSelected={selected.includes(personInfo.id)}
+                onSelect={onSelect}
+                key={personInfo.id}
+                data={personInfo}
+              />
+            )),
           )
         )}
       </div>

@@ -55,6 +55,11 @@ code {
   border: 2px solid pink;
 }
 
+.person-info-selected {
+    padding: 30px;
+    border: 2px solid pink;
+}
+
 .firstNameLastName {
   padding: 0 0 10px;
   color: #333333;
