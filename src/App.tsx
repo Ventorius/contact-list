@@ -4,7 +4,7 @@ import PersonInfo from './PersonInfo';
 import { useInfiniteQuery } from 'react-query';
 
 function App() {
-  const { isLoading, isError, data, fetchNextPage, refetch } = useInfiniteQuery(
+  const { isLoading, isFetchingNextPage, isError, data, fetchNextPage, refetch } = useInfiniteQuery(
     'contacts',
     apiData,
     {
@@ -31,7 +31,7 @@ function App() {
             </button>
           </div>
         )}
-        {isLoading ? (
+        {isLoading && !isError ? (
           <div>Loading...</div>
         ) : (
           data?.pages?.map((group) =>
@@ -47,7 +47,7 @@ function App() {
         )}
       </div>
       <button className="load-more-button" onClick={() => fetchNextPage()}>
-        Load more
+        {isFetchingNextPage ? 'Loading...' : 'Load more'}
       </button>
     </div>
   );
